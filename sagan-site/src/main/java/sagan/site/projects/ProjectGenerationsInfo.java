@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.SortNatural;
 import sagan.site.projects.support.SupportPolicy;
 import sagan.site.projects.support.SupportTimeline;
+import sagan.site.projects.support.SupportTimelineRequest;
 
 @Embeddable
 public class ProjectGenerationsInfo {
@@ -55,7 +56,8 @@ public class ProjectGenerationsInfo {
 	public void computeSupportPolicyDates(SupportPolicy supportPolicy) {
 		iterateOnGenerations((currentGeneration, nextGeneration) -> {
 			LocalDate nextGenReleaseDate = nextGeneration != null ? nextGeneration.getInitialReleaseDate() : null;
-			SupportTimeline currentGenTimeline = supportPolicy.calculateTimeline(currentGeneration.getInitialReleaseDate(), nextGenReleaseDate);
+			SupportTimelineRequest supportTimelineRequest = new SupportTimelineRequest(currentGeneration.getInitialReleaseDate(), currentGeneration.getOssSupportEnforcedEndDate(), nextGenReleaseDate);
+			SupportTimeline currentGenTimeline = supportPolicy.calculateTimeline(supportTimelineRequest);
 			currentGeneration.setOssSupportPolicyEndDate(currentGenTimeline.getOpenSourceSupport().getEndDate());
 			currentGeneration.setCommercialSupportPolicyEndDate(currentGenTimeline.getCommercialSupport().getEndDate());
 		});
@@ -64,12 +66,12 @@ public class ProjectGenerationsInfo {
 	private <T> void iterateOnGenerations(BiConsumer<ProjectGeneration, ProjectGeneration> consumer) {
 		Iterator<ProjectGeneration> it = this.generations.iterator();
 		if(!it.hasNext()) return;
-		ProjectGeneration first = it.next();
+		ProjectGeneration current = it.next();
+		consumer.accept(current, null);
 		while(it.hasNext()) {
-			ProjectGeneration next = it.next();
-			consumer.accept(first, next);
-			first = next;
+			ProjectGeneration previous = it.next();
+			consumer.accept(previous, current);
+			current = previous;
 		}
-		consumer.accept(first, null);
 	}
 }
