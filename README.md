@@ -1,3 +1,7 @@
+## Note to contributors
+
+The spring.io website is not using the sagan application in production anymore. This repository is now archived.
+
 ## Sagan: the spring.io site and reference application
 
 Welcome! The code in the main branch of this repository is deployed and running right now at [spring.io](http://spring.io). The [blog][], the collection of [guides][], and everything else you see there is implemented right here.

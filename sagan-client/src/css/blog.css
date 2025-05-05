@@ -112,6 +112,7 @@ article:last-child {
     max-width: 86%;
     line-height: 1.5em;
     font-size: .875rem;
+    color: #666;
 }
 #blog-sidebar-newsletter form.mktoForm .mktoCheckboxList > label a:hover {
     color: #333;
@@ -165,10 +166,10 @@ article:last-child {
         display: block;
     }
 }
-.blog--post a {
+.blog--post a, #disqus_thread a {
     color: #086dc3;
 }
-.blog--post a:hover {
+.blog--post a:hover, #disqus_thread a:hover {
     color: #333;
 }
 .blog--wrapper {
@@ -209,6 +210,7 @@ article:last-child {
 
 .blog--post ul li {
     margin: 12px 0;
+    line-height: 1.7em;
 }
 
 .blog--post pre.prettyprint {

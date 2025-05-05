@@ -164,6 +164,12 @@ public class RewriteTests {
 		validateTemporaryRedirect("https://spring.io/services", "/training");
 	}
 
+	@Test
+	void surveyIsRedirected() throws Exception {
+		validateTemporaryRedirect("https://spring.io/survey", "https://dimensionalresearch.co1.qualtrics.com/jfe/form/SV_6QLOBsf3TirbfDM");
+		validateTemporaryRedirect("https://spring.io/survey?mkt_tok=NV_RX-Z7-QFN", "https://dimensionalresearch.co1.qualtrics.com/jfe/form/SV_6QLOBsf3TirbfDM?mkt_tok=NV_RX-Z7-QFN");
+	}
+
 	private void validateTemporaryRedirect(String requestedUrl, String redirectedUrl) throws IOException,
 			ServletException, URISyntaxException {
 		validateRedirect(requestedUrl, redirectedUrl, 302);
@@ -182,6 +188,7 @@ public class RewriteTests {
 			servletRequest.addHeader("host", requestUrl.getHost());
 		}
 		servletRequest.setRequestURI(requestUrl.getPath());
+		servletRequest.setQueryString(requestUrl.getQuery());
 		MockHttpServletResponse servletResponse = new MockHttpServletResponse();
 
 		filterChain.doFilter(servletRequest, servletResponse);

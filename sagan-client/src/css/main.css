@@ -339,9 +339,11 @@ body {
     outline: none;
 }
 #springlogo,
-#springlogo-foot {
+#springlogo-foot,
+#springlogo-dark,
+#springlogo-foot-dark {
     height: 48px;
-    max-width: 250px;
+    max-width: 300px;
 }
 #search {
     cursor: pointer;
@@ -4223,10 +4225,91 @@ body.dark .theme-switch {
     background: #41464b;
 }
 
+body.dark #springlogo {
+    display: none;
+}
+
+body.dark #springlogo-foot {
+    display: none;
+}
+
+#springlogo-foot-dark {
+    display: none;
+}
+body.dark #springlogo-foot-dark {
+    display: block;
+}
+
+#springlogo-dark {
+    display: none;
+}
+body.dark #springlogo-dark {
+    display: block;
+}
+
 .img-light {
     display: block;
 }
 
 .img-dark {
     display: none;
+}
+
+.mktoForm div,
+.mktoForm span,
+.mktoForm label,
+.mktoForm p {
+    color: rgba(255,255,255,.6);
+}
+
+body.dark #spring-one {
+    background: url(/images/sp1/sp1-dark.svg) no-repeat center center;
+    background-size: cover;
+}
+
+#spring-one {
+    height: 440px;
+    background: url(/images/sp1/sp1-light.svg) no-repeat center center;
+    background-size: cover;
+    text-align: center;
+}
+
+body#index #spring-one h1 {
+    margin: 0 auto;
+    font-size: 3.75rem;
+    line-height: 1em;
+    max-width: 700px;
+    padding-top: 65px;
+}
+
+body#index #spring-one p.desc {
+    font-size: 1.2rem;
+}
+
+
+@media(max-width: 800px) {
+    body#index #spring-one h1 {
+        font-size: 2.5rem;
+    }
+}
+
+#global-banner {
+    display: block;
+    padding: 10px 0;
+    background: #6db33f;
+    cursor: pointer;
+    font-size: .9rem;
+    text-align: center;
+    color: rgba(255,255,255,.7);
+}
+
+#global-banner:hover {
+    color: white;
+}
+
+
+@media(max-width:900px) {
+    #global-banner {
+        display: none;
+    }
 }
